@@ -69,7 +69,7 @@
             padding: 20px 0;
             text-align: center;
             box-shadow: none;
-            position: static; /* Not sticky, scrolls with content */
+            position: static; 
             top: auto;
             z-index: 10;
             padding-bottom: 50px;
@@ -108,7 +108,7 @@
             border-radius: 8px;
             box-shadow: var(--shadow);
             transition: transform 0.3s, box-shadow 0.3s;
-            min-height: 200px; /* Base min-height for all cards to stretch from */
+            min-height: 200px; 
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -119,9 +119,9 @@
             padding: 0; 
             margin: 0; 
             overflow: hidden; 
-            /* 🔥 FIX: Let the image define the card's height, but give it a max for control */
             height: auto; 
-            max-height: 450px; /* Adjust this value if your image's aspect ratio makes it too tall or short */
+            /* Adjusted max-height to a standard size to better influence equal card height */
+            max-height: 400px; 
             
             display: flex; 
             align-items: center; 
@@ -129,17 +129,23 @@
             flex-direction: column; 
             background-color: transparent; 
             border-radius: 8px; 
-            flex-shrink: 0; /* Prevent the profile card from shrinking if other cards are taller */
+            flex-shrink: 0; 
+        }
+
+        /* 🔥 HOBBIES SPACING ADJUSTMENT */
+        #hobbies {
+            /* Adds extra space above the hobbies card, especially useful on mobile/stacked layouts */
+            margin-top: 15px; 
         }
 
         .card:hover {
             transform: translateY(-5px);
-            box-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
         }
 
         h2 {
-            color: var(--secondary-color); /* Light beige */
-            border-bottom: 2px solid var(--primary-color); /* Beige border */
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--primary-color);
             padding-bottom: 10px;
             margin-bottom: 20px;
             position: relative; 
@@ -147,7 +153,7 @@
             padding-right: 30px; 
         }
         h3 {
-            color: var(--secondary-color); /* Light beige */
+            color: var(--secondary-color);
             margin-bottom: 10px;
         }
         p {
@@ -163,13 +169,12 @@
             display: block;
         }
 
-        /* Profile image needs to fill 100% of its card, with radius on image itself */
         .profile-card img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
-            border-radius: 8px; /* Image uses border-radius to fill the card corners */
+            border-radius: 8px;
             margin: 0;
         }
 
