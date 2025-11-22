@@ -7,9 +7,8 @@
     <style>
         /* --- 1. Basic Reset and Global Styles --- */
         :root {
-            /* Define some color variables for easy changes */
-            --primary-color: #007bff; /* Blue */
-            --secondary-color: #28a745; /* Green */
+            --primary-color: #007bff;
+            --secondary-color: #28a745;
             --text-color: #333;
             --card-background: #ffffff;
             --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -21,7 +20,6 @@
             box-sizing: border-box;
         }
 
-        /* Set body background to transparent for the video to show */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
@@ -38,7 +36,7 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            z-index: -2; /* Puts the video below all content */
+            z-index: -2;
         }
 
         #myVideo {
@@ -49,8 +47,8 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%); /* Centers the video */
-            object-fit: cover; /* Ensures video covers the whole area */
+            transform: translate(-50%, -50%);
+            object-fit: cover;
         }
 
         #content-wrap {
@@ -59,7 +57,7 @@
             min-height: 100vh;
         }
 
-        /* --- 3. Layout and Content Styles (Original Styles) --- */
+        /* --- 3. Layout and Content Styles --- */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -70,13 +68,11 @@
             padding-top: 50px;
         }
 
-        /* New: Grid for the cards inside the main section */
         #card-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
         }
-
 
         header {
             background-color: var(--primary-color);
@@ -102,7 +98,7 @@
             box-shadow: var(--shadow);
             height: fit-content;
             
-            /* 🔥 FIX 4: Quick Facts Sidebar made static */
+            /* 🔥 FIX 3: Quick Facts Sidebar made static */
             position: static; 
             top: auto;
             
@@ -113,7 +109,7 @@
         .card {
             background-color: var(--card-background);
             
-            /* 🔥 FIX 3: Center Text Alignment for all cards */
+            /* 🔥 FIX 2: Center Text Alignment for all cards */
             text-align: center;
             
             padding: 30px;
@@ -122,10 +118,15 @@
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        /* Specifically style the profile card to remove padding for the image */
+        /* --- PROFILE CARD STYLES (Image 3/4 Height Fix) --- */
         .profile-card {
             padding: 0;
             overflow: hidden;
+            
+            /* Sets card as flex container for proportional height */
+            min-height: 400px; 
+            display: flex;
+            flex-direction: column;
         }
 
         .card:hover {
@@ -140,6 +141,7 @@
             margin-bottom: 20px;
         }
 
+        /* Images in non-profile cards */
         .highlight-image {
             width: 100%;
             max-height: 250px;
@@ -149,35 +151,40 @@
             display: block;
         }
 
-        /* 🔥 FIX 2: Image filling the box (Ensure object-fit: cover is here) */
+        /* 🔥 FIX 1: Image filling 3/4 of the profile card's height */
         .profile-card img {
             width: 100%;
-            height: 200px;
+            height: 75%; /* Takes 75% of the profile-card's height */
             object-fit: cover; 
             display: block;
             border-radius: 8px 8px 0 0; 
         }
 
-        /* Style for the profile card content */
+        /* Style for the profile card content (The remaining 25%) */
         .profile-card .content {
             padding: 15px 20px;
+            flex-grow: 1; /* Allows content to fill the rest of the available height */
+            
+            /* Vertically and Horizontally center content */
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            flex-direction: column; 
         }
 
-        /* --- 4. QUICK FACTS HOVER FIX (Still included for desktop interaction) --- */
-
-        /* Content is initially hidden (or styled minimally) */
+        /* --- QUICK FACTS HOVER FIX --- */
         .sidebar section {
             max-height: 0;
             opacity: 0;
             overflow: hidden;
             transition: max-height 0.5s ease-in-out, opacity 0.3s;
-            /* 🔥 Revert text alignment for sidebar content to left for readability */
+            /* Revert text alignment for sidebar content to left for readability */
             text-align: left; 
         }
 
         /* Desktop Hover: Show details when hovering over the sidebar */
         .sidebar:hover section {
-            max-height: 300px; /* Large enough value to show content */
+            max-height: 300px;
             opacity: 1;
         }
 
