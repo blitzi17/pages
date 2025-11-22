@@ -5,181 +5,218 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Awesome Main Page</title>
     <style>
-    /* --- 1. Basic Reset and Global Styles --- */
-    :root {
-        /* Define some color variables for easy changes */
-        --primary-color: #007bff; /* Blue */
-        --secondary-color: #28a745; /* Green */
-        --text-color: #333;
-        --card-background: #ffffff;
-        --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    /* Set body background to transparent for the video to show */
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        line-height: 1.6;
-        color: var(--text-color);
-        background-color: transparent; 
-        min-height: 100vh;
-    }
-
-    /* --- 2. VIDEO BACKGROUND STYLES --- */
-    #video-bg {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        z-index: -2; /* Puts the video below all content */
-    }
-
-    #myVideo {
-        min-width: 100%; 
-        min-height: 100%;
-        width: auto;
-        height: auto;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%); /* Centers the video */
-        object-fit: cover; /* Ensures video covers the whole area */
-    }
-
-    /* CRITICAL CHANGE: Removed the background-color rule from #content-wrap */
-    #content-wrap {
-        position: relative; 
-        z-index: 1; 
-        min-height: 100vh;
-        /* THIS LINE WAS REMOVED: background-color: rgba(255, 255, 255, 0.75); */
-    }
-
-    /* --- 3. Layout and Content Styles (Original Styles) --- */
-    .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 20px;
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        gap: 30px;
-        padding-top: 50px;
-    }
-
-    header {
-        background-color: var(--primary-color);
-        color: white;
-        padding: 20px 0;
-        text-align: center;
-        box-shadow: var(--shadow);
-        position: sticky;
-        top: 0;
-        z-index: 10;
-    }
-
-    main {
-        grid-column: 2 / 3;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .sidebar {
-        grid-column: 1 / 2;
-        background-color: var(--card-background);
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: var(--shadow);
-        height: fit-content;
-        position: sticky;
-        top: 100px;
-    }
-
-    .card {
-        /* Cards will still have a white background, making the content inside readable */
-        background-color: var(--card-background); 
-        padding: 30px;
-        border-radius: 8px;
-        box-shadow: var(--shadow);
-        transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    }
-
-    h2 {
-        color: var(--primary-color);
-        border-bottom: 2px solid var(--secondary-color);
-        padding-bottom: 10px;
-        margin-bottom: 20px;
-    }
-
-    .highlight-image {
-        width: 100%;
-        max-height: 250px;
-        object-fit: cover;
-        border-radius: 6px;
-        margin-bottom: 15px;
-        display: block;
-    }
-    .card img {
-        width: 100%;       /* Forces image to take full width of the box */
-        height: 200px;     /* Sets a fixed height (optional, ensures uniformity) */
-        object-fit: cover; /* Crops the image nicely so it doesn't stretch/distort */
-        display: block;    /* Removes default bottom spacing */
-        border-radius: 8px 8px 0 0; /* Optional: rounds top corners to match card */
-    }
-
-    /* --- 4. Responsiveness (Media Queries) --- */
-    @media (max-width: 768px) {
-        .container {
-            grid-template-columns: 1fr;
-            padding: 15px;
+        /* --- 1. Basic Reset and Global Styles --- */
+        :root {
+            /* Define some color variables for easy changes */
+            --primary-color: #007bff; /* Blue */
+            --secondary-color: #28a745; /* Green */
+            --text-color: #333;
+            --card-background: #ffffff;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        main, .sidebar {
-            grid-column: 1 / -1;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Set body background to transparent for the video to show */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: transparent;
+            min-height: 100vh;
+        }
+
+        /* --- 2. VIDEO BACKGROUND STYLES --- */
+        #video-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -2; /* Puts the video below all content */
+        }
+
+        #myVideo {
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Centers the video */
+            object-fit: cover; /* Ensures video covers the whole area */
+        }
+
+        #content-wrap {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+        }
+
+        /* --- 3. Layout and Content Styles (Original Styles) --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            /* Changed to 1fr for sidebar and 3fr for main to make room for 4 cards */
+            grid-template-columns: 1fr 3fr; 
+            gap: 30px;
+            padding-top: 50px;
+        }
+        
+        /* New: Grid for the cards inside the main section */
+        #card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        /* Main now holds the grid of cards */
+        main {
+            grid-column: 2 / 3;
+            /* Removed flex-direction: column to allow card-grid to manage layout */
+            gap: 20px;
         }
 
         .sidebar {
-            position: static;
-            top: auto;
+            grid-column: 1 / 2;
+            background-color: var(--card-background);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+            
+            /* ADDED: Initial state for the hidden content in sidebar */
+            transition: all 0.3s ease;
         }
-    }
-</style>
+
+        /* CARD STYLES */
+        .card {
+            background-color: var(--card-background);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        /* Specifically style the profile card to remove padding for the image */
+        .profile-card {
+            padding: 0; 
+            overflow: hidden; /* Ensures the border radius works with the image */
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .highlight-image {
+            width: 100%;
+            max-height: 250px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        /* 🔥 FIX 1: Image filling the box */
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover; /* Ensures image covers the area completely */
+            display: block;
+            border-radius: 8px 8px 0 0;
+        }
+        
+        /* Style for the profile card content */
+        .profile-card .content {
+            padding: 15px 20px;
+        }
+
+        /* --- 4. QUICK FACTS HOVER FIX --- */
+
+        /* Content is initially hidden (or styled minimally) */
+        .sidebar section {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, opacity 0.3s;
+        }
+
+        /* Desktop Hover: Show details when hovering over the sidebar */
+        .sidebar:hover section {
+            max-height: 300px; /* Large enough value to show content */
+            opacity: 1;
+        }
+
+        /* --- 5. Responsiveness (Media Queries) --- */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                padding: 15px;
+            }
+
+            main, .sidebar {
+                grid-column: 1 / -1;
+            }
+
+            .sidebar {
+                position: static;
+                top: auto;
+                
+                /* 🔥 FIX 2: Mobile - Always show Quick Facts content on small screens */
+                max-height: none !important;
+                opacity: 1 !important;
+            }
+            
+            .sidebar section {
+                max-height: none; /* Override desktop max-height */
+                opacity: 1;       /* Always show the content */
+                padding: 10px 0;
+                border-top: 1px solid #f0f0f0;
+                margin-top: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <main class="container"> 
-
-      <div class="card">...</div>
-
-      <div class="card">...</div>
-
-      <div class="card">
-          <div class="image-container">
-              <img src="media/9428f962-9bb2-4913-be85-ec03ffb2a2fc.jpg" alt="Image of me">
-          </div>
-          <div class="content">
-              <h3>My Profile</h3>
-          </div>
-      </div>
 
     <div id="video-bg">
         <video autoplay muted loop id="myVideo">
-            <source src="media/9968977-uhd_3840_2160_25fps.mp4" type="video/mp4"> 
+            <source src="media/9968977-uhd_3840_2160_25fps.mp4" type="video/mp4">
             Your browser does not support HTML5 video.
         </video>
     </div>
 
-    <div id="content-wrap"> 
+    <div id="content-wrap">
 
         <header>
             <h1>Welcome to My World</h1>
@@ -193,7 +230,7 @@
 
                 <section>
                     <h3>My Nickname:</h3>
-                    <p>The name my friends usually call me is: **[Your Nickname Here]**</p>
+                    <p>The name my friends usually call me is: Karol </p>
                 </section>
 
                 <hr style="margin: 15px 0; border-color: #eee;">
@@ -206,33 +243,39 @@
             </aside>
 
             <main>
-                
-                <section id="about" class="card">
-                    <h2>📝 About Me</h2>
-                    
-                    <img src="placeholder-profile.jpg" alt="A profile picture or highlight image related to you." class="highlight-image">
-                    
-                    <p>Hello! I'm Karol Joy M. Ronquillo, and I'm passionate about my creative skills like creating flowers with different material, sculpting and flower arrangement. I currently live in Makati City and spend my days understanding and fixing my depression.</p>
-                    <p>I find joy in continuous learning and tackling new challenges, especially when it involves creative things.</p>
-                </section>
+                <div id="card-grid">
 
-                <section id="hobbies" class="card">
-                    <h2>🕹️ Hobbies & Interests</h2>
+                    <div class="card profile-card">
+                        <div class="image-container">
+                            <img src="media/9428f962-9bb2-4913-be85-ec03ffb2a2fc.jpg" alt="Image of me">
+                        </div>
+                        <div class="content">
+                            <h3>My Profile</h3>
+                        </div>
+                    </div>
                     
-                    <img src="placeholder-hobby.jpg" alt="Image showcasing one of your hobbies." class="highlight-image">
+                    <section id="about" class="card">
+                        <h2>📝 About Me</h2>
+                        <img src="placeholder-profile.jpg" alt="A profile picture or highlight image related to you." class="highlight-image">
+                        <p>Hello! I'm Karol Joy M. Ronquillo, and I'm passionate about my creative skills like creating flowers with different material, sculpting and flower arrangement. I currently live in Makati City and spend my days understanding and fixing my depression.</p>
+                        <p>I find joy in continuous learning and tackling new challenges, especially when it involves creative things.</p>
+                    </section>
 
-                    <p>When I'm not working on my dream, you can find me engaged in the following activities:</p>
-                    <ul>
-                        <li>**Hobby 1:Flower making and arrangement.</li>
-                        <li>**Hobby 2:Event Design.</li>
-                        <li>**Hobby 3:Sculpting and Installion Art.</li>
-                    </ul>
-                    <p>I find these activities help me relax and inspire new ideas.</p>
-                </section>
-                
+                    <section id="hobbies" class="card">
+                        <h2>🕹️ Hobbies & Interests</h2>
+                        <img src="placeholder-hobby.jpg" alt="Image showcasing one of your hobbies." class="highlight-image">
+                        <p>When I'm not working on my dream, you can find me engaged in the following activities:</p>
+                        <ul>
+                            <li>**Hobby 1:** Flower making and arrangement.</li>
+                            <li>**Hobby 2:** Event Design.</li>
+                            <li>**Hobby 3:** Sculpting and Installion Art.</li>
+                        </ul>
+                        <p>I find these activities help me relax and inspire new ideas.</p>
+                    </section>
+
+                </div>
             </main>
         </div>
-
-    </div> 
-    </body>
+    </div>
+</body>
 </html>
