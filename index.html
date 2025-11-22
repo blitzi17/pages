@@ -59,8 +59,8 @@
         #card-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            align-items: stretch; /* Ensures cards in this grid are equal height */
+            gap: 20px; /* Grid gap: 20px */
+            align-items: stretch; 
         }
 
         header {
@@ -120,9 +120,7 @@
             margin: 0; 
             overflow: hidden; 
             height: auto; 
-            /* Adjusted max-height to a standard size to better influence equal card height */
             max-height: 400px; 
-            
             display: flex; 
             align-items: center; 
             justify-content: center; 
@@ -132,10 +130,15 @@
             flex-shrink: 0; 
         }
 
-        /* 🔥 HOBBIES SPACING ADJUSTMENT */
+        /* 🔥 HOBBIES SPACING ADJUSTMENT (Not too close) */
         #hobbies {
-            /* Adds extra space above the hobbies card, especially useful on mobile/stacked layouts */
-            margin-top: 15px; 
+            /* We want a 5px gap. Grid gap is 20px. 20px - 5px = 15px. */
+            /* So we use a negative margin of -15px to leave 5px remaining space. */
+            margin-top: -15px; 
+            
+            /* Restore the border radius so the card looks distinct */
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
         }
 
         .card:hover {
@@ -216,6 +219,13 @@
 
             main, .sidebar {
                 grid-column: 1 / -1;
+            }
+
+            /* Restore standard spacing and border radius for mobile */
+            #hobbies {
+                margin-top: 20px; 
+                border-top-left-radius: 8px;
+                border-top-right-radius: 8px;
             }
 
             .sidebar {
